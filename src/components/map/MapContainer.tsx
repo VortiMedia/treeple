@@ -21,7 +21,28 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
+    // Validate style URL before initializing map
+    if (!MAP_CONFIG.style || MAP_CONFIG.style === '') {
+      setError('MapTiler API key is not configured. Please check your .env.local file.');
+      setIsLoading(false);
+      console.error(
+        '❌ Cannot initialize map without a valid style URL.\n' +
+        'Make sure NEXT_PUBLIC_MAPTILER_KEY is set in your .env.local file.'
+      );
+      return;
+    }
+
+    let loadTimeout: NodeJS.Timeout;
+
     try {
+      // Log map initialization with truncated API key for security
+      const truncatedStyle = MAP_CONFIG.style.replace(/key=([^&]+)/, 'key=***');
+      console.log('Initializing map with style:', truncatedStyle);
+
+      // Log container dimensions for debugging layout issues
+      const rect = mapContainerRef.current.getBoundingClientRect();
+      console.log(`Map container dimensions: ${rect.width}x${rect.height}`);
+
       // Initialize map
       const map = new maplibregl.Map({
         container: mapContainerRef.current,
@@ -35,22 +56,49 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
 
       mapRef.current = map;
 
+      // Set up load timeout (10 seconds)
+      loadTimeout = setTimeout(() => {
+        setError('Map is taking too long to load. Please check your internet connection and API key.');
+        setIsLoading(false);
+      }, 10000);
+
       // Set up event listeners
       map.on('load', () => {
+        clearTimeout(loadTimeout);
         setIsLoading(false);
+        console.log('✓ Map loaded successfully');
         if (onMapLoad) {
           onMapLoad(map);
         }
       });
 
       map.on('error', (e) => {
+        clearTimeout(loadTimeout);
         console.error('Map error:', e);
-        setError('Failed to load map. Please check your MapTiler API key.');
+
+        // Provide specific error messages based on error type
+        let errorMessage = 'Failed to load map. Please check your MapTiler API key.';
+
+        if (e.error) {
+          const error = e.error;
+
+          // Check for HTTP status errors
+          if (error.status === 401 || error.status === 403) {
+            errorMessage = 'Invalid MapTiler API key. Please verify your NEXT_PUBLIC_MAPTILER_KEY in .env.local';
+          } else if (error.status === 404) {
+            errorMessage = 'MapTiler style not found. Check your API key and style URL';
+          } else if (error.message?.includes('network') || error.message?.includes('fetch')) {
+            errorMessage = 'Failed to load map tiles. Check your internet connection';
+          }
+        }
+
+        setError(errorMessage);
         setIsLoading(false);
       });
 
       // Cleanup
       return () => {
+        clearTimeout(loadTimeout);
         map.remove();
         mapRef.current = null;
       };

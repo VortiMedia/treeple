@@ -29,30 +29,56 @@ export function GridOverlay({
 
     // Wait for map to be fully loaded
     const setupLayers = () => {
-      // Remove existing layers and source if they exist
-      if (map.getLayer('grid-fill')) map.removeLayer('grid-fill');
-      if (map.getLayer('grid-outline')) map.removeLayer('grid-outline');
-      if (map.getSource('grid')) map.removeSource('grid');
+      try {
+        // Check if map style is loaded
+        if (!map.isStyleLoaded()) {
+          console.warn('⚠️  Map style not yet loaded, waiting...');
+          return;
+        }
 
-      // Add grid source with tile status merged
-      const enrichedData = {
-        ...gridData,
-        features: gridData.features.map((feature) => {
-          const tileState = tileStates.get(feature.properties.id);
-          return {
-            ...feature,
-            properties: {
-              ...feature.properties,
-              status: tileState?.status || feature.properties.status
-            }
-          };
-        })
-      };
+        // Remove existing layers and source if they exist
+        if (map.getLayer('grid-fill')) map.removeLayer('grid-fill');
+        if (map.getLayer('grid-outline')) map.removeLayer('grid-outline');
+        if (map.getSource('grid')) map.removeSource('grid');
 
-      map.addSource('grid', {
-        type: 'geojson',
-        data: enrichedData as any
-      });
+        // Add grid source with tile status merged
+        const enrichedData = {
+          ...gridData,
+          features: gridData.features.map((feature) => {
+            const tileState = tileStates.get(feature.properties.id);
+            return {
+              ...feature,
+              properties: {
+                ...feature.properties,
+                status: tileState?.status || feature.properties.status
+              }
+            };
+          })
+        };
+
+        // Validate enriched data
+        if (!enrichedData.features || enrichedData.features.length === 0) {
+          console.error('❌ No features to add to grid overlay');
+          return;
+        }
+
+        // Check for duplicate IDs
+        const idSet = new Set();
+        enrichedData.features.forEach((feature) => {
+          if (idSet.has(feature.properties.id)) {
+            console.warn(`⚠️  Duplicate tile ID detected: ${feature.properties.id}`);
+          }
+          idSet.add(feature.properties.id);
+        });
+
+        console.log(`Setting up grid overlay with ${enrichedData.features.length} tiles`);
+
+        map.addSource('grid', {
+          type: 'geojson',
+          data: enrichedData as any
+        });
+
+        console.log('✓ Grid source added successfully');
 
       // Add fill layer with dynamic coloring based on status and hover
       map.addLayer({
@@ -145,6 +171,11 @@ export function GridOverlay({
         map.getCanvas().style.cursor = '';
         onTileHover(null);
       });
+
+        console.log('✓ Grid layers added successfully');
+      } catch (error) {
+        console.error('❌ Failed to add grid overlay layers:', error);
+      }
     };
 
     if (map.isStyleLoaded()) {
@@ -155,11 +186,15 @@ export function GridOverlay({
 
     // Cleanup
     return () => {
-      if (map.getLayer('grid-fill')) map.removeLayer('grid-fill');
-      if (map.getLayer('grid-outline')) map.removeLayer('grid-outline');
-      if (map.getSource('grid')) map.removeSource('grid');
+      try {
+        if (map.getLayer('grid-fill')) map.removeLayer('grid-fill');
+        if (map.getLayer('grid-outline')) map.removeLayer('grid-outline');
+        if (map.getSource('grid')) map.removeSource('grid');
+      } catch (error) {
+        // Ignore cleanup errors (map might be destroyed already)
+      }
     };
-  }, [map, gridData, tileStates, hoveredTileId, onTileClick, onTileHover]);
+  }, [map, gridData, tileStates, onTileClick, onTileHover]);
 
   // Update paint properties when hover state changes
   useEffect(() => {
