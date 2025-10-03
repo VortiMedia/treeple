@@ -18,12 +18,13 @@ export const metadata: Metadata = {
     description: "Treeple conservation platform featuring Yellowstone National Park. Explore and symbolically claim parcels to support conservation.",
     type: "website",
     images: ["/og-image.png"]
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1
   }
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1
 };
 
 export default function RootLayout({

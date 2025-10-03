@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Map as MapLibreMap } from 'maplibre-gl';
 import { Header } from '@/components/layout/Header';
 import { SidePanel } from '@/components/layout/SidePanel';
@@ -78,9 +78,9 @@ export default function Home() {
     loadData();
   }, []);
 
-  const handleMapLoad = (loadedMap: MapLibreMap) => {
+  const handleMapLoad = useCallback((loadedMap: MapLibreMap) => {
     setMap(loadedMap);
-  };
+  }, []);
 
   const handleTileClick = (tileId: string) => {
     const tile = getTileById(tileStates, tileId);
