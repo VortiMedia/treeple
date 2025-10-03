@@ -198,7 +198,14 @@ export function GridOverlay({
 
   // Update paint properties when hover state changes
   useEffect(() => {
-    if (!map || !map.getLayer('grid-fill')) return;
+    if (!map) return;
+
+    try {
+      if (!map.getLayer('grid-fill')) return;
+    } catch (error) {
+      // Style not loaded yet
+      return;
+    }
 
     map.setPaintProperty('grid-fill', 'fill-color', [
       'case',

@@ -67,6 +67,12 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
         clearTimeout(loadTimeout);
         setIsLoading(false);
         console.log('✓ Map loaded successfully');
+
+        // Force resize after a brief delay to ensure container has proper dimensions
+        setTimeout(() => {
+          map.resize();
+        }, 100);
+
         if (onMapLoad) {
           onMapLoad(map);
         }
@@ -117,8 +123,8 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
   };
 
   return (
-    <div className={`relative w-full h-full ${className}`}>
-      <div ref={mapContainerRef} className="absolute inset-0" />
+    <div className={`relative w-full h-full ${className}`} style={{ minHeight: '400px' }}>
+      <div ref={mapContainerRef} className="absolute inset-0 w-full h-full" style={{ minHeight: '400px' }} />
       {isLoading && <MapSkeleton />}
       {error && <MapError message={error} onRetry={handleRetry} />}
       {!isLoading && !error && children}
