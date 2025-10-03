@@ -132,10 +132,11 @@ cp .env.example .env.local
 # Add your MapTiler API key to .env.local
 ```
 
-4. **Generate data**
+4. **Generate data** (Important!)
 ```bash
 npm run setup
 ```
+⚠️ **Note:** This step is required! It generates the grid data files. If you skip this, the map won't load.
 
 5. **Start development server**
 ```bash
@@ -144,6 +145,110 @@ npm run dev
 
 6. **Open browser**
 Visit [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**1. Map not loading / "There is no style added to the map" warning**
+- **Cause:** Missing or invalid MapTiler API key
+- **Solution:**
+  - Ensure `NEXT_PUBLIC_MAPTILER_KEY` is set in `.env.local`
+  - Get a free key from [MapTiler Cloud](https://cloud.maptiler.com/)
+  - Verify the key is valid in your MapTiler dashboard
+  - **Important:** Restart the dev server after adding/changing environment variables
+  - Check browser console for specific error messages
+
+**2. Tiles not clickable / Map interactions not working**
+- **Cause:** Corrupted or missing grid data
+- **Solution:**
+  - Run `npm run generate-grid` to regenerate the tile data
+  - Check that `/public/data/yellowstone-grid.json` exists and contains unique tile IDs
+  - Look for console errors about duplicate IDs
+  - Verify the file size is ~12MB (not a few KB)
+
+**3. 404 errors for data files**
+- **Cause:** Setup script not run or data files missing
+- **Solution:**
+  - Run the setup script: `npm run setup`
+  - Verify files exist:
+    - `public/data/yellowstone-grid.json` (~12MB)
+    - `public/data/seed-tiles.json`
+  - Check that the `public` directory is being served correctly
+  - Clear Next.js cache: `rm -rf .next` and rebuild
+
+**4. Layout issues / Content pushed off screen**
+- **Cause:** CSS conflicts or browser cache
+- **Solution:**
+  - Clear browser cache and hard reload (Cmd/Ctrl + Shift + R)
+  - Check browser console for CSS or layout errors
+  - Verify the header height (h-16) matches in both Header and page components
+  - Try a different browser to isolate the issue
+
+**5. Environment variables not working on Vercel**
+- **Cause:** Variables not configured in Vercel dashboard
+- **Solution:**
+  - Add variables in Vercel dashboard: Settings → Environment Variables
+  - Variables must be prefixed with `NEXT_PUBLIC_` to be available in the browser
+  - Set the variable for all environments (Production, Preview, Development)
+  - **Important:** Redeploy after adding/changing environment variables (changes don't auto-apply)
+
+**6. "Grid data is corrupted" error**
+- **Cause:** All tiles have the same ID (usually "YS-000-000")
+- **Solution:**
+  - This happens if the grid generation script had a bug
+  - Run `npm run generate-grid` to regenerate with the fixed script
+  - Check console logs to verify unique IDs are being generated
+  - The script should show: "✓ Validated: All [number] tile IDs are unique"
+
+**7. Slow performance or map lag**
+- **Cause:** Too many tiles rendering or hardware limitations
+- **Solution:**
+  - Ensure you're using a modern browser (Chrome 90+, Safari 14+)
+  - Check that hardware acceleration is enabled in browser settings
+  - Reduce zoom level to show fewer tiles
+  - Close other browser tabs to free up memory
+
+### Debug Checklist
+
+If something isn't working, check these in order:
+
+1. ✅ **Environment Variables**
+   - `.env.local` file exists
+   - `NEXT_PUBLIC_MAPTILER_KEY` is set
+   - Dev server restarted after adding variables
+
+2. ✅ **Data Files**
+   - Run `npm run setup` completed successfully
+   - `public/data/yellowstone-grid.json` exists (~12MB)
+   - `public/data/seed-tiles.json` exists
+
+3. ✅ **Browser Console**
+   - Open DevTools (F12)
+   - Check Console tab for errors
+   - Look for specific error messages with ✓ or ❌ indicators
+
+4. ✅ **Dependencies**
+   - Run `npm install` to ensure all packages are installed
+   - Check Node.js version is 20+ (`node --version`)
+   - Clear node_modules and reinstall if needed: `rm -rf node_modules && npm install`
+
+5. ✅ **Build & Cache**
+   - Clear Next.js cache: `rm -rf .next`
+   - Rebuild: `npm run build`
+   - Restart dev server: `npm run dev`
+
+### Getting Help
+
+If you're still stuck:
+1. Check the browser console (F12) for detailed errors
+2. Search existing [GitHub Issues](https://github.com/[your-username]/treeple/issues)
+3. Open a new issue with:
+   - Error message (from console)
+   - Steps to reproduce
+   - Your environment (OS, browser, Node version)
 
 ---
 
