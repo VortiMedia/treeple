@@ -5,7 +5,6 @@ import maplibregl, { Map as MapLibreMap } from 'maplibre-gl';
 import { MAP_CONFIG } from '@/constants/map-config';
 import { MapSkeleton } from './MapSkeleton';
 import { MapError } from './MapError';
-import * as pmtiles from 'pmtiles';
 
 interface MapContainerProps {
   onMapLoad?: (map: MapLibreMap) => void;
@@ -25,60 +24,20 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
     let loadTimeout: NodeJS.Timeout;
 
     try {
-      // Register PMTiles protocol
-      const protocol = new pmtiles.Protocol();
-      maplibregl.addProtocol('pmtiles', protocol.tile);
-      console.log('✓ PMTiles protocol registered');
-
       // Log container dimensions for debugging layout issues
       const rect = mapContainerRef.current.getBoundingClientRect();
       console.log(`Map container dimensions: ${rect.width}x${rect.height}`);
 
-      // Create custom style with local PMTiles hillshade and OSM base
-      const customStyle: any = {
-        version: 8,
-        sources: {
-          'osm-raster': {
-            type: 'raster',
-            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-            tileSize: 256,
-            attribution: '© OpenStreetMap contributors'
-          },
-          'hillshade': {
-            type: 'raster',
-            tiles: ['pmtiles:///tiles/yellowstone-hillshade.pmtiles/{z}/{x}/{y}'],
-            tileSize: 256,
-            minzoom: 9,
-            maxzoom: 14
-          }
-        },
-        layers: [
-          {
-            id: 'osm-base',
-            type: 'raster',
-            source: 'osm-raster',
-            paint: {
-              'raster-opacity': 0.7
-            }
-          },
-          {
-            id: 'hillshade-layer',
-            type: 'raster',
-            source: 'hillshade',
-            paint: {
-              'raster-opacity': 0.4
-            }
-          }
-        ],
-        glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf'
-      };
+      // Use OSM fallback style (no API key or local tiles needed)
+      // This works in both development and production
+      const styleUrl = MAP_CONFIG.style || 'https://demotiles.maplibre.org/style.json';
 
-      console.log('🗺️ Initializing map with local PMTiles hillshade');
+      console.log(`🗺️ Initializing map with style: ${styleUrl}`);
 
-      // Initialize map with custom style
+      // Initialize map with OSM fallback style
       const map = new maplibregl.Map({
         container: mapContainerRef.current,
-        style: customStyle,
+        style: styleUrl,
         center: MAP_CONFIG.center,
         zoom: MAP_CONFIG.zoom,
         minZoom: MAP_CONFIG.minZoom,
@@ -90,7 +49,7 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
 
       // Set up load timeout (10 seconds)
       loadTimeout = setTimeout(() => {
-        setError('Map is taking too long to load. Please check your internet connection and API key.');
+        setError('Map is taking too long to load. Please check your internet connection.');
         setIsLoading(false);
       }, 10000);
 
@@ -98,18 +57,8 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
       map.on('load', () => {
         clearTimeout(loadTimeout);
         setIsLoading(false);
-        console.log('✓ Map loaded successfully with local PMTiles hillshade');
+        console.log('✅ Map loaded successfully');
 
-        // Add USGS attribution for elevation data
-        const attributionControl = map._controls.find(
-          (control: any) => control instanceof maplibregl.AttributionControl
-        );
-        if (attributionControl) {
-          (attributionControl as any)._updateAttributions();
-          (attributionControl as any)._editAttribution = () => {
-            return 'Elevation data: <a href="https://www.usgs.gov/3d-elevation-program" target="_blank">USGS 3DEP</a>';
-          };
-        }
 
         // Force resize after a brief delay to ensure container has proper dimensions
         setTimeout(() => {
@@ -140,17 +89,17 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
         }
 
         // Provide specific error messages based on error type
-        let errorMessage = 'Failed to load map. Please check your MapTiler API key.';
+        let errorMessage = 'Failed to load map. Please check your internet connection.';
 
         if (e.error) {
           const error = e.error;
 
           // Check for HTTP status errors
           if (error.status === 401 || error.status === 403) {
-            errorMessage = 'Invalid MapTiler API key. Please verify your NEXT_PUBLIC_MAPTILER_KEY in .env.local';
-            console.error('❌ MapContainer: Authentication error - Invalid API key');
+            errorMessage = 'Failed to load map tiles. Authentication error.';
+            console.error('❌ MapContainer: Authentication error');
           } else if (error.status === 404) {
-            errorMessage = 'MapTiler style not found. Check your API key and style URL';
+            errorMessage = 'Map style not found. Please refresh the page.';
             console.error('❌ MapContainer: 404 error - Resource not found');
           } else if (error.message?.includes('network') || error.message?.includes('fetch')) {
             errorMessage = 'Failed to load map tiles. Check your internet connection';
