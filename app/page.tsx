@@ -6,12 +6,16 @@ import { Header } from '@/components/layout/Header';
 import { SidePanel } from '@/components/layout/SidePanel';
 import { MapContainer } from '@/components/map/MapContainer';
 import { GridOverlay } from '@/components/map/GridOverlay';
+import { LandmarkOverlay } from '@/components/map/LandmarkOverlay';
+import { DonorPatternLabels } from '@/components/map/DonorPatternLabels';
 import { MapControls } from '@/components/map/MapControls';
 import { MapLegend } from '@/components/map/MapLegend';
 import { TileDetails } from '@/components/tiles/TileDetails';
 import { TileDetailsSkeleton } from '@/components/tiles/TileDetailsSkeleton';
+import { LandmarkDetails } from '@/components/landmarks/LandmarkDetails';
 import { loadGridData, loadSeedData, mergeTileData, getTileById } from '@/lib/tile-data';
 import { GridData, Tile } from '@/types';
+import { Landmark } from '@/data/landmarks';
 import { toast } from 'sonner';
 
 export default function Home() {
@@ -19,6 +23,7 @@ export default function Home() {
   const [gridData, setGridData] = useState<GridData | null>(null);
   const [tileStates, setTileStates] = useState<Map<string, Tile>>(new Map());
   const [selectedTile, setSelectedTile] = useState<Tile | null>(null);
+  const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [hoveredTileId, setHoveredTileId] = useState<string | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -82,27 +87,42 @@ export default function Home() {
     setMap(loadedMap);
   }, []);
 
-  const handleTileClick = (tileId: string) => {
+  const handleTileClick = useCallback((tileId: string) => {
     const tile = getTileById(tileStates, tileId);
     if (tile) {
       setSelectedTile(tile);
+      setSelectedLandmark(null); // Clear landmark selection
       setIsPanelOpen(true);
     }
-  };
+  }, [tileStates]);
 
-  const handleTileHover = (tileId: string | null) => {
+  const handleLandmarkClick = useCallback((landmark: Landmark) => {
+    setSelectedLandmark(landmark);
+    setSelectedTile(null); // Clear tile selection
+    setIsPanelOpen(true);
+  }, []);
+
+  const handleTileHover = useCallback((tileId: string | null) => {
     setHoveredTileId(tileId);
-  };
+  }, []);
 
   const handlePanelClose = () => {
     setIsPanelOpen(false);
     setSelectedTile(null);
+    setSelectedLandmark(null);
   };
 
-  const handleReserve = () => {
+  const handleReserveTile = () => {
     // MVP: Just show success toast (no real persistence)
     toast.success('Tile reserved!', {
       description: 'Your reservation has been confirmed. (Demo only)'
+    });
+  };
+
+  const handleReserveLandmark = () => {
+    // MVP: Just show success toast (no real persistence)
+    toast.success('Landmark reserved!', {
+      description: `${selectedLandmark?.name} reservation confirmed. (Demo only)`
     });
   };
 
@@ -152,7 +172,7 @@ export default function Home() {
   }
 
   return (
-    <div className="h-screen w-full flex flex-col overflow-hidden">
+    <div className="h-screen w-full flex flex-col overflow-hidden pt-24">
       {/* Header */}
       <Header />
 
@@ -170,6 +190,8 @@ export default function Home() {
                 onTileClick={handleTileClick}
                 onTileHover={handleTileHover}
               />
+              <LandmarkOverlay map={map} onLandmarkClick={handleLandmarkClick} />
+              <DonorPatternLabels map={map} />
               <MapControls map={map} />
               <MapLegend />
             </>
@@ -180,7 +202,13 @@ export default function Home() {
       {/* Side Panel / Bottom Sheet */}
       <SidePanel isOpen={isPanelOpen} onClose={handlePanelClose}>
         {selectedTile ? (
-          <TileDetails tile={selectedTile} onReserve={handleReserve} />
+          <TileDetails
+            tile={selectedTile}
+            onReserve={handleReserveTile}
+            onLandmarkClick={handleLandmarkClick}
+          />
+        ) : selectedLandmark ? (
+          <LandmarkDetails landmark={selectedLandmark} onReserve={handleReserveLandmark} />
         ) : (
           <TileDetailsSkeleton />
         )}

@@ -1,0 +1,154 @@
+{
+  "clusters": [
+    {
+      "donor": "Elon Musk",
+      "total_donated": 4000000,
+      "tiles": [
+        "YS-025-037", "YS-025-038", "YS-025-039", "YS-025-040",
+        "YS-026-036", "YS-026-041",
+        "YS-027-035", "YS-027-037", "YS-027-040", "YS-027-042",
+        "YS-028-035", "YS-028-042",
+        "YS-029-035", "YS-029-042",
+        "YS-030-036", "YS-030-041",
+        "YS-031-037", "YS-031-040",
+        "YS-032-038", "YS-032-039"
+      ],
+      "pattern": "bear",
+      "donated_at": "2024-12-15T18:30:00Z",
+      "price_per_tile": 200000,
+      "message": "For the bears. Let's make conservation multiplanetary. 🐻",
+      "visibility": "public"
+    },
+    {
+      "donor": "Patagonia Foundation",
+      "total_donated": 6800000,
+      "tiles": [
+        "YS-035-057", "YS-035-058", "YS-035-059", "YS-035-060",
+        "YS-036-056", "YS-036-057", "YS-036-058", "YS-036-059", "YS-036-060", "YS-036-061",
+        "YS-037-055", "YS-037-056", "YS-037-057", "YS-037-058", "YS-037-059", "YS-037-060", "YS-037-061", "YS-037-062",
+        "YS-038-055", "YS-038-056", "YS-038-057", "YS-038-058", "YS-038-059", "YS-038-060", "YS-038-061", "YS-038-062",
+        "YS-039-056", "YS-039-057", "YS-039-060", "YS-039-061",
+        "YS-040-056", "YS-040-057", "YS-040-060", "YS-040-061"
+      ],
+      "pattern": "bison",
+      "donated_at": "2024-11-20T14:00:00Z",
+      "price_per_tile": 200000,
+      "message": "The Earth is our only shareholder. Protecting Yellowstone's iconic bison.",
+      "visibility": "public"
+    },
+    {
+      "donor": "Marc Benioff",
+      "total_donated": 5200000,
+      "tiles": [
+        "YS-020-053",
+        "YS-021-052", "YS-021-053", "YS-021-054",
+        "YS-022-051", "YS-022-052", "YS-022-053", "YS-022-054", "YS-022-055",
+        "YS-023-052", "YS-023-053", "YS-023-054",
+        "YS-024-051", "YS-024-052", "YS-024-053", "YS-024-054", "YS-024-055",
+        "YS-025-050", "YS-025-051", "YS-025-052", "YS-025-053", "YS-025-054", "YS-025-055", "YS-025-056",
+        "YS-026-053",
+        "YS-027-053"
+      ],
+      "pattern": "tree",
+      "donated_at": "2024-10-08T09:15:00Z",
+      "price_per_tile": 200000,
+      "message": "Forests are the lungs of our planet. Proud to support Yellowstone's ecosystems.",
+      "visibility": "public"
+    },
+    {
+      "donor": "Bill & Melinda Gates Foundation",
+      "total_donated": 2500000,
+      "tiles": [
+        "YS-021-039",
+        "YS-020-047",
+        "YS-015-045", "YS-015-046", "YS-015-047",
+        "YS-016-044", "YS-016-045", "YS-016-046", "YS-016-047", "YS-016-048",
+        "YS-017-044", "YS-017-045", "YS-017-046", "YS-017-047", "YS-017-048"
+      ],
+      "pattern": "cluster_old_faithful",
+      "donated_at": "2024-09-30T16:45:00Z",
+      "price_per_tile": 166666,
+      "message": "Supporting geothermal research and conservation around Old Faithful.",
+      "visibility": "public"
+    },
+    {
+      "donor": "Leonardo DiCaprio Foundation",
+      "total_donated": 1800000,
+      "tiles": [
+        "YS-047-068", "YS-047-069", "YS-047-070",
+        "YS-048-067", "YS-048-068", "YS-048-069", "YS-048-070", "YS-048-071",
+        "YS-049-068", "YS-049-069", "YS-049-070"
+      ],
+      "pattern": "cluster_grand_canyon",
+      "donated_at": "2024-08-22T11:30:00Z",
+      "price_per_tile": 163636,
+      "message": "Protecting our planet's most precious ecosystems. #RewildYellowstone",
+      "visibility": "public"
+    },
+    {
+      "donor": "National Geographic Society",
+      "total_donated": 1200000,
+      "tiles": [
+        "YS-045-035", "YS-045-036", "YS-045-037",
+        "YS-046-034", "YS-046-035", "YS-046-036", "YS-046-037", "YS-046-038",
+        "YS-047-035", "YS-047-036"
+      ],
+      "pattern": "cluster_yellowstone_lake",
+      "donated_at": "2024-07-15T13:20:00Z",
+      "price_per_tile": 120000,
+      "message": "Exploring and protecting wild places for over a century.",
+      "visibility": "public"
+    },
+    {
+      "donor": "Salesforce Ohana Foundation",
+      "total_donated": 950000,
+      "tiles": [
+        "YS-065-075", "YS-065-076",
+        "YS-066-074", "YS-066-075", "YS-066-076", "YS-066-077",
+        "YS-067-075", "YS-067-076"
+      ],
+      "pattern": "cluster_random",
+      "donated_at": "2024-06-10T10:00:00Z",
+      "price_per_tile": 118750,
+      "message": "Technology for good. Conservation for the future.",
+      "visibility": "public"
+    },
+    {
+      "donor": "Anonymous",
+      "total_donated": 500000,
+      "tiles": [
+        "YS-012-030", "YS-012-031",
+        "YS-013-030", "YS-013-031"
+      ],
+      "pattern": "cluster_small",
+      "donated_at": "2024-12-01T08:00:00Z",
+      "price_per_tile": 125000,
+      "message": "",
+      "visibility": "anonymous"
+    }
+  ],
+  "statistics": {
+    "total_donors": 8,
+    "total_donated": 22950000,
+    "total_tiles_reserved": 131,
+    "patterns_count": {
+      "bear": 1,
+      "bison": 1,
+      "tree": 1,
+      "cluster_old_faithful": 1,
+      "cluster_grand_canyon": 1,
+      "cluster_yellowstone_lake": 1,
+      "cluster_random": 1,
+      "cluster_small": 1
+    },
+    "average_price_per_tile": 175191,
+    "highest_donation": 6800000,
+    "lowest_donation": 500000
+  },
+  "notes": {
+    "implementation": "Use these attributions to populate sold tiles in seed-tiles.json. Each tile should include donor name, pattern, and timestamp.",
+    "display": "Show donor names on tile details panel. Consider privacy settings - 'anonymous' donors should not show personal info.",
+    "certificates": "Generate unique certificates for each donor with pattern visualization and total contribution.",
+    "marketing": "Highlight major donors on homepage/about page. Use their stories to attract more contributions."
+  }
+}

@@ -11,6 +11,15 @@ export const YELLOWSTONE_BBOX: [number, number, number, number] = [-111.1, 44.1,
 function getMapTilerStyleUrl(): string | null {
   const apiKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
 
+  // TEMPORARY: Use free OSM style if MapTiler is rate limited
+  // This is a public demo style that doesn't require API key
+  const useFallback = true;
+
+  if (useFallback) {
+    console.log('🗺️ Using free OSM fallback style (no API key needed)');
+    return 'https://demotiles.maplibre.org/style.json';
+  }
+
   if (!apiKey || apiKey.trim() === '') {
     console.error(
       '❌ MapTiler API key is missing!\n' +

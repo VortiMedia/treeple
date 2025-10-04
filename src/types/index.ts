@@ -15,6 +15,11 @@ export interface Tile {
   price: number;
   reservedAt?: string;
   soldAt?: string;
+  // Donor metadata for visual patterns
+  donor?: string;
+  pattern?: string;
+  message?: string;
+  visibility?: 'public' | 'anonymous';
 }
 
 export interface GridFeature extends Feature<Polygon> {
@@ -50,5 +55,23 @@ export interface SeedData {
     status: 'reserved' | 'sold';
     reservedAt?: string;
     soldAt?: string;
+    price?: number;
+    donor?: string;
+    pattern?: string;
+    message?: string;
+    visibility?: 'public' | 'anonymous';
   };
+}
+
+export interface User {
+  email: string;
+  name?: string;
+}
+
+export interface AuthContextType {
+  user: User | null;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, name?: string) => Promise<void>;
+  signOut: () => void;
+  isLoading: boolean;
 }

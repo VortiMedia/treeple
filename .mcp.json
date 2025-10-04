@@ -6,6 +6,36 @@
         "shadcn@latest",
         "mcp"
       ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--headless",
+        "--caps",
+        "pdf,vision,verify",
+        "--viewport-size",
+        "1280,720",
+        "--timeout-navigation",
+        "30000",
+        "--output-dir",
+        "/Users/david/treeple/test-results",
+        "--save-session",
+        "--save-trace"
+      ],
+      "env": {},
+      "working_directory": "/Users/david/treeple"
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--access-token",
+        "sbp_ae375fbfee8d98730c06ee54489e1b3e64ee4e20"
+      ],
+      "env": {},
+      "working_directory": null
     }
   }
 }

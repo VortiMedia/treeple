@@ -8,24 +8,25 @@ interface TileColorConfig {
 }
 
 // Tile status colors for MapLibre layers (RGBA format)
+// Reduced opacity to show the beautiful topographic map underneath
 export const TILE_COLORS: Record<TileStatus, TileColorConfig> = {
   available: {
-    fill: 'rgba(16, 185, 129, 0.2)',      // emerald-500 at 20% opacity
-    stroke: 'rgba(16, 185, 129, 0.6)',    // emerald-500 at 60% opacity
-    hoverFill: 'rgba(16, 185, 129, 0.4)', // emerald-500 at 40% opacity
-    hoverStroke: 'rgba(16, 185, 129, 0.9)' // emerald-500 at 90% opacity
+    fill: 'rgba(16, 185, 129, 0.15)',      // emerald-500 at 15% opacity
+    stroke: 'rgba(16, 185, 129, 0.6)',     // emerald-500 at 60% opacity
+    hoverFill: 'rgba(16, 185, 129, 0.35)', // emerald-500 at 35% opacity
+    hoverStroke: 'rgba(16, 185, 129, 1)'  // emerald-500 at 100% opacity
   },
   reserved: {
-    fill: 'rgba(251, 191, 36, 0.2)',      // amber-400 at 20% opacity
-    stroke: 'rgba(251, 191, 36, 0.6)',    // amber-400 at 60% opacity
-    hoverFill: 'rgba(251, 191, 36, 0.4)', // amber-400 at 40% opacity
-    hoverStroke: 'rgba(251, 191, 36, 0.9)' // amber-400 at 90% opacity
+    fill: 'rgba(251, 191, 36, 0.15)',      // amber-400 at 15% opacity
+    stroke: 'rgba(251, 191, 36, 0.6)',     // amber-400 at 60% opacity
+    hoverFill: 'rgba(251, 191, 36, 0.35)', // amber-400 at 35% opacity
+    hoverStroke: 'rgba(251, 191, 36, 1)'  // amber-400 at 100% opacity
   },
   sold: {
-    fill: 'rgba(100, 116, 139, 0.3)',     // slate-500 at 30% opacity
-    stroke: 'rgba(100, 116, 139, 0.7)',   // slate-500 at 70% opacity
-    hoverFill: 'rgba(100, 116, 139, 0.45)', // slate-500 at 45% opacity
-    hoverStroke: 'rgba(100, 116, 139, 0.9)' // slate-500 at 90% opacity
+    fill: 'rgba(100, 116, 139, 0.15)',     // slate-500 at 15% opacity
+    stroke: 'rgba(100, 116, 139, 0.6)',    // slate-500 at 60% opacity
+    hoverFill: 'rgba(100, 116, 139, 0.35)', // slate-500 at 35% opacity
+    hoverStroke: 'rgba(100, 116, 139, 1)' // slate-500 at 100% opacity
   }
 };
 

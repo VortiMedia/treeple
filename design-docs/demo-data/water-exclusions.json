@@ -1,0 +1,215 @@
+{
+  "water_features": {
+    "yellowstone_lake": {
+      "type": "polygon",
+      "description": "Yellowstone Lake - largest high-elevation lake in North America",
+      "center": {
+        "lat": 44.4667,
+        "lng": -110.3667
+      },
+      "approximate_bounds": {
+        "north": 44.55,
+        "south": 44.35,
+        "east": -110.25,
+        "west": -110.50
+      },
+      "area_sq_miles": 136,
+      "shoreline_miles": 110,
+      "coordinates": [
+        [-110.50, 44.35],
+        [-110.50, 44.40],
+        [-110.48, 44.45],
+        [-110.45, 44.50],
+        [-110.40, 44.53],
+        [-110.35, 44.55],
+        [-110.30, 44.54],
+        [-110.25, 44.52],
+        [-110.25, 44.48],
+        [-110.27, 44.44],
+        [-110.28, 44.40],
+        [-110.30, 44.36],
+        [-110.35, 44.35],
+        [-110.40, 44.35],
+        [-110.45, 44.35],
+        [-110.50, 44.35]
+      ],
+      "exclusion_reason": "Major water body - no tiles should be placed over open water",
+      "implementation_notes": "Use Turf.js booleanPointInPolygon to filter out tiles whose centers fall within this polygon"
+    },
+    "yellowstone_river_north": {
+      "type": "linestring",
+      "description": "Yellowstone River (north section from lake to Grand Canyon)",
+      "coordinates": [
+        [-110.367, 44.467],
+        [-110.380, 44.490],
+        [-110.395, 44.510],
+        [-110.410, 44.530],
+        [-110.430, 44.550],
+        [-110.450, 44.570],
+        [-110.470, 44.590],
+        [-110.485, 44.610],
+        [-110.495, 44.630],
+        [-110.500, 44.650],
+        [-110.502, 44.670],
+        [-110.500, 44.690],
+        [-110.497, 44.710]
+      ],
+      "buffer_km": 0.3,
+      "exclusion_reason": "Major river - exclude tiles along riverbed",
+      "implementation_notes": "Use Turf.js buffer to create a 0.3km corridor, then exclude tiles within"
+    },
+    "yellowstone_river_south": {
+      "type": "linestring",
+      "description": "Yellowstone River (south section into Yellowstone Lake)",
+      "coordinates": [
+        [-110.320, 44.367],
+        [-110.335, 44.385],
+        [-110.350, 44.405],
+        [-110.360, 44.425],
+        [-110.367, 44.445],
+        [-110.367, 44.467]
+      ],
+      "buffer_km": 0.25,
+      "exclusion_reason": "River inlet to lake",
+      "implementation_notes": "Use Turf.js buffer to create a 0.25km corridor"
+    },
+    "lewis_lake": {
+      "type": "polygon",
+      "description": "Lewis Lake - south of Yellowstone Lake",
+      "center": {
+        "lat": 44.3,
+        "lng": -110.5
+      },
+      "approximate_bounds": {
+        "north": 44.32,
+        "south": 44.28,
+        "east": -110.48,
+        "west": -110.52
+      },
+      "area_sq_miles": 4.3,
+      "coordinates": [
+        [-110.52, 44.28],
+        [-110.52, 44.30],
+        [-110.51, 44.32],
+        [-110.49, 44.32],
+        [-110.48, 44.31],
+        [-110.48, 44.29],
+        [-110.49, 44.28],
+        [-110.52, 44.28]
+      ],
+      "exclusion_reason": "Lake - no tiles over open water",
+      "implementation_notes": "Filter out tiles using booleanPointInPolygon"
+    },
+    "shoshone_lake": {
+      "type": "polygon",
+      "description": "Shoshone Lake - largest backcountry lake",
+      "center": {
+        "lat": 44.366,
+        "lng": -110.683
+      },
+      "approximate_bounds": {
+        "north": 44.39,
+        "south": 44.34,
+        "east": -110.65,
+        "west": -110.72
+      },
+      "area_sq_miles": 8.06,
+      "coordinates": [
+        [-110.72, 44.34],
+        [-110.72, 44.37],
+        [-110.70, 44.39],
+        [-110.67, 44.39],
+        [-110.65, 44.37],
+        [-110.65, 44.35],
+        [-110.67, 44.34],
+        [-110.72, 44.34]
+      ],
+      "exclusion_reason": "Lake - no tiles over open water",
+      "implementation_notes": "Filter out tiles using booleanPointInPolygon"
+    },
+    "heart_lake": {
+      "type": "polygon",
+      "description": "Heart Lake - scenic mountain lake",
+      "center": {
+        "lat": 44.298,
+        "lng": -110.533
+      },
+      "approximate_bounds": {
+        "north": 44.31,
+        "south": 44.285,
+        "east": -110.52,
+        "west": -110.55
+      },
+      "area_sq_miles": 3.5,
+      "coordinates": [
+        [-110.55, 44.285],
+        [-110.55, 44.30],
+        [-110.54, 44.31],
+        [-110.53, 44.31],
+        [-110.52, 44.30],
+        [-110.52, 44.29],
+        [-110.53, 44.285],
+        [-110.55, 44.285]
+      ],
+      "exclusion_reason": "Lake - no tiles over open water",
+      "implementation_notes": "Filter out tiles using booleanPointInPolygon"
+    },
+    "madison_river": {
+      "type": "linestring",
+      "description": "Madison River - west side of park",
+      "coordinates": [
+        [-111.05, 44.65],
+        [-111.04, 44.63],
+        [-111.02, 44.61],
+        [-111.00, 44.59],
+        [-110.98, 44.57],
+        [-110.96, 44.55],
+        [-110.94, 44.53],
+        [-110.92, 44.51]
+      ],
+      "buffer_km": 0.25,
+      "exclusion_reason": "River corridor",
+      "implementation_notes": "Use Turf.js buffer to create a 0.25km corridor"
+    },
+    "firehole_river": {
+      "type": "linestring",
+      "description": "Firehole River - flows through geyser basins",
+      "coordinates": [
+        [-110.85, 44.50],
+        [-110.84, 44.48],
+        [-110.83, 44.46],
+        [-110.82, 44.44],
+        [-110.81, 44.42],
+        [-110.80, 44.40]
+      ],
+      "buffer_km": 0.2,
+      "exclusion_reason": "River through geothermal areas",
+      "implementation_notes": "Use Turf.js buffer to create a 0.2km corridor"
+    }
+  },
+  "implementation_guidelines": {
+    "priority": "high",
+    "rationale": "Water features should not have grid tiles overlaid, as this would be visually confusing and geographically nonsensical. Users cannot 'claim' a section of a lake or river.",
+    "steps": [
+      "1. Load water exclusion polygons and linestrings",
+      "2. For each tile in the grid, check if its center point falls within any polygon",
+      "3. For linestrings, create buffered corridors using Turf.js buffer()",
+      "4. Remove tiles that intersect with water features",
+      "5. Consider adding a 'water_nearby' flag for tiles adjacent to water features (premium locations)"
+    ],
+    "libraries_needed": [
+      "@turf/boolean-point-in-polygon",
+      "@turf/buffer",
+      "@turf/intersect"
+    ],
+    "estimated_tiles_excluded": "~800-1200 tiles (5-7% of total grid)",
+    "visual_enhancement": "Consider adding a semi-transparent water layer texture to excluded areas for visual clarity"
+  },
+  "statistics": {
+    "total_water_features": 8,
+    "total_polygon_features": 5,
+    "total_linestring_features": 3,
+    "largest_feature": "yellowstone_lake",
+    "total_approximate_area_sq_miles": 151.86
+  }
+}

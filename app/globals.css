@@ -14,8 +14,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215.4 16.3% 15%;
 
-    /* Primary: Forest Green #4f872b */
-    --primary: 100 52% 35%;
+    /* Primary: Emerald Green #059669 (emerald-600) */
+    --primary: 160 84% 39%;
     --primary-foreground: 0 0% 98%;
 
     /* Secondary: Warm Amber #d4a574 */
@@ -33,7 +33,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 100 52% 35%;
+    --ring: 160 84% 39%;
     --radius: 0.75rem;
 
     /* Tile Status Colors */
@@ -49,7 +49,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 100 52% 45%;
+    --primary: 160 84% 49%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 33 45% 55%;
     --secondary-foreground: 210 40% 98%;
@@ -61,7 +61,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 100 52% 45%;
+    --ring: 160 84% 49%;
   }
 }
 
@@ -77,11 +77,21 @@
 @layer utilities {
   /* Glassmorphism utilities */
   .glass {
-    @apply backdrop-blur-xl bg-white/90 border border-slate-200/50;
+    @apply backdrop-blur-xl bg-white/90 rounded-2xl shadow-lg border border-slate-200/50;
   }
 
   .glass-strong {
     @apply backdrop-blur-xl bg-white/95 border border-slate-200/50;
+  }
+
+  /* Sticky header utility */
+  .sticky-header {
+    @apply sticky top-0 backdrop-blur-xl bg-white/95 border-b border-slate-200/50 z-10;
+  }
+
+  /* Transition utilities */
+  .transition-smooth {
+    transition: all 0.2s ease-in-out;
   }
 
   /* Panel slide animations */
@@ -113,6 +123,26 @@
 
   /* Tile hover effect */
   .tile-hover {
-    transition: all 0.2s ease-in-out;
+    @apply transition-all duration-200 hover:opacity-95;
+  }
+
+  /* Landmark marker animations */
+  @keyframes landmark-pulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.15);
+    }
+  }
+
+  .landmark-marker-container {
+    @apply relative;
+  }
+
+  .landmark-marker-container .animate-pulse {
+    animation: landmark-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
