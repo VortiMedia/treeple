@@ -35,7 +35,7 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
       console.log(`Map container dimensions: ${rect.width}x${rect.height}`);
 
       // Create custom style with local PMTiles hillshade and OSM base
-      const customStyle = {
+      const customStyle: any = {
         version: 8,
         sources: {
           'osm-raster': {
@@ -83,8 +83,7 @@ export function MapContainer({ onMapLoad, className = '', children }: MapContain
         zoom: MAP_CONFIG.zoom,
         minZoom: MAP_CONFIG.minZoom,
         maxZoom: MAP_CONFIG.maxZoom,
-        maxBounds: MAP_CONFIG.maxBounds as any,
-        attributionControl: true
+        maxBounds: MAP_CONFIG.maxBounds as any
       });
 
       mapRef.current = map;

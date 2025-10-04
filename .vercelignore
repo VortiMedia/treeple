@@ -1,0 +1,13 @@
+# Exclude large data files (used for local development only)
+elevation-data/
+public/tiles/
+test-results/
+
+# Development files
+.vscode/
+.mcp.json
+app/test-auth/
+
+# Environment files
+.env.local
+.env*.local
