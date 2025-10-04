@@ -116,9 +116,14 @@ export function mergeTileData(gridData: GridData, seedData: SeedData): Map<strin
       coordinates: feature.properties.coordinates,
       status: seedStatus?.status || feature.properties.status,
       geometry: feature.geometry,
-      price: DEFAULT_TILE_PRICE,
+      price: seedStatus?.price || DEFAULT_TILE_PRICE,
       ...(seedStatus?.reservedAt && { reservedAt: seedStatus.reservedAt }),
-      ...(seedStatus?.soldAt && { soldAt: seedStatus.soldAt })
+      ...(seedStatus?.soldAt && { soldAt: seedStatus.soldAt }),
+      // Include donor metadata for visual patterns
+      ...(seedStatus?.donor && { donor: seedStatus.donor }),
+      ...(seedStatus?.pattern && { pattern: seedStatus.pattern }),
+      ...(seedStatus?.message && { message: seedStatus.message }),
+      ...(seedStatus?.visibility && { visibility: seedStatus.visibility })
     };
 
     tileMap.set(tileId, tile);

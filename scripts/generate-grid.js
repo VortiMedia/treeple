@@ -9,6 +9,42 @@ const UNITS = 'kilometers';
 
 console.log('Generating Yellowstone grid...');
 
+// Load water exclusion data
+const waterExclusionsPath = path.join(__dirname, '..', 'design-docs', 'demo-data', 'water-exclusions.json');
+const waterExclusions = JSON.parse(fs.readFileSync(waterExclusionsPath, 'utf8'));
+
+// Function to check if a point is in water
+function isPointInWater(lat, lng) {
+  const point = turf.point([lng, lat]);
+
+  // Check polygons (lakes)
+  const polygons = ['yellowstone_lake', 'lewis_lake', 'shoshone_lake', 'heart_lake'];
+  for (const polygonName of polygons) {
+    const feature = waterExclusions.water_features[polygonName];
+    if (!feature || !feature.coordinates) continue;
+
+    const polygon = turf.polygon([feature.coordinates]);
+    if (turf.booleanPointInPolygon(point, polygon)) {
+      return true;
+    }
+  }
+
+  // Check buffered linestrings (rivers)
+  const rivers = ['yellowstone_river_north', 'yellowstone_river_south', 'madison_river', 'firehole_river'];
+  for (const riverName of rivers) {
+    const feature = waterExclusions.water_features[riverName];
+    if (!feature || !feature.coordinates) continue;
+
+    const line = turf.lineString(feature.coordinates);
+    const buffered = turf.buffer(line, feature.buffer_km, { units: 'kilometers' });
+    if (turf.booleanPointInPolygon(point, buffered)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 // Generate square grid
 const grid = turf.squareGrid(YELLOWSTONE_BBOX, CELL_SIZE, { units: UNITS });
 
@@ -16,44 +52,65 @@ const grid = turf.squareGrid(YELLOWSTONE_BBOX, CELL_SIZE, { units: UNITS });
 const usedIds = new Set();
 let idCounter = 0;
 
-// Add properties to each cell
-grid.features = grid.features.map((feature, index) => {
-  const center = turf.center(feature);
-  const [lng, lat] = center.geometry.coordinates;
+// Add properties to each cell and filter out water
+const initialTileCount = grid.features.length;
+let waterExcludedCount = 0;
 
-  // Calculate row/col based on position relative to bounding box
-  const minLat = YELLOWSTONE_BBOX[1];
-  const minLng = YELLOWSTONE_BBOX[0];
+grid.features = grid.features
+  .map((feature, index) => {
+    const center = turf.center(feature);
+    const [lng, lat] = center.geometry.coordinates;
 
-  // Convert coordinate differences to km
-  const latDiffKm = (lat - minLat) * 111; // 1 degree ≈ 111 km
-  const avgLat = (YELLOWSTONE_BBOX[1] + YELLOWSTONE_BBOX[3]) / 2;
-  const lngDiffKm = (lng - minLng) * 111 * Math.cos(avgLat * Math.PI / 180);
+    // Calculate row/col based on position relative to bounding box
+    const minLat = YELLOWSTONE_BBOX[1];
+    const minLng = YELLOWSTONE_BBOX[0];
 
-  const row = Math.floor(latDiffKm / CELL_SIZE);
-  const col = Math.floor(lngDiffKm / CELL_SIZE);
+    // Use Turf's distance function for accurate calculations at any latitude
+    const southwestPoint = turf.point([minLng, minLat]);
+    const cellSouthPoint = turf.point([lng, minLat]);
+    const cellWestPoint = turf.point([minLng, lat]);
 
-  // Generate tile ID with zero-padded row and column
-  let tileId = `YS-${String(row).padStart(3, '0')}-${String(col).padStart(3, '0')}`;
+    // Calculate actual distances using great-circle distance
+    const latDistanceKm = turf.distance(southwestPoint, cellSouthPoint, { units: 'kilometers' });
+    const lngDistanceKm = turf.distance(southwestPoint, cellWestPoint, { units: 'kilometers' });
 
-  // If ID already exists (shouldn't happen with correct math, but safety check)
-  while (usedIds.has(tileId)) {
-    tileId = `YS-${String(row).padStart(3, '0')}-${String(col).padStart(3, '0')}-${idCounter++}`;
-  }
-  usedIds.add(tileId);
+    const row = Math.floor(latDistanceKm / CELL_SIZE);
+    const col = Math.floor(lngDistanceKm / CELL_SIZE);
 
-  return {
-    ...feature,
-    properties: {
-      id: tileId,
-      coordinates: {
-        lat: parseFloat(lat.toFixed(6)),
-        lng: parseFloat(lng.toFixed(6))
-      },
-      status: 'available' // default status
+    // Generate tile ID with zero-padded row and column
+    let tileId = `YS-${String(row).padStart(3, '0')}-${String(col).padStart(3, '0')}`;
+
+    // If ID already exists (shouldn't happen with correct math, but safety check)
+    while (usedIds.has(tileId)) {
+      tileId = `YS-${String(row).padStart(3, '0')}-${String(col).padStart(3, '0')}-${idCounter++}`;
     }
-  };
-});
+    usedIds.add(tileId);
+
+    return {
+      ...feature,
+      properties: {
+        id: tileId,
+        coordinates: {
+          lat: parseFloat(lat.toFixed(6)),
+          lng: parseFloat(lng.toFixed(6))
+        },
+        status: 'available' // default status
+      }
+    };
+  })
+  .filter((feature) => {
+    const { lat, lng } = feature.properties.coordinates;
+    const inWater = isPointInWater(lat, lng);
+    if (inWater) {
+      waterExcludedCount++;
+    }
+    return !inWater;
+  });
+
+console.log(`\nWater Exclusions:`);
+console.log(`  Initial tiles: ${initialTileCount}`);
+console.log(`  Excluded (water): ${waterExcludedCount}`);
+console.log(`  Remaining tiles: ${grid.features.length}`);
 
 // Validate for duplicate IDs
 console.log('Validating tile IDs...');

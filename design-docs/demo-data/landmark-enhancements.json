@@ -1,0 +1,342 @@
+{
+  "landmarks": [
+    {
+      "name": "Old Faithful",
+      "coordinates": {
+        "lat": 44.460411,
+        "lng": -110.828213
+      },
+      "tile_id": "YS-021-039",
+      "type": "geyser",
+      "icon": "geyser",
+      "prominence": "high",
+      "zoom_levels": [8, 22],
+      "description": "The world's most famous geyser, erupting approximately every 90 minutes",
+      "category": "geothermal",
+      "visitor_center": true,
+      "accessibility": "high",
+      "tags": ["iconic", "geothermal", "geyser", "must-see"]
+    },
+    {
+      "name": "Grand Prismatic Spring",
+      "coordinates": {
+        "lat": 44.525114,
+        "lng": -110.838244
+      },
+      "tile_id": "YS-020-047",
+      "type": "hot_spring",
+      "icon": "hot-spring",
+      "prominence": "high",
+      "zoom_levels": [8, 22],
+      "description": "Largest hot spring in the US, third-largest in the world. Famous for rainbow colors",
+      "category": "geothermal",
+      "visitor_center": false,
+      "accessibility": "high",
+      "tags": ["iconic", "geothermal", "photography", "colorful", "must-see"],
+      "diameter_feet": 370,
+      "depth_feet": 160
+    },
+    {
+      "name": "Lower Falls (Grand Canyon of Yellowstone)",
+      "coordinates": {
+        "lat": 44.71806,
+        "lng": -110.49611
+      },
+      "tile_id": "YS-047-068",
+      "type": "waterfall",
+      "icon": "waterfall",
+      "prominence": "high",
+      "zoom_levels": [8, 22],
+      "description": "308-foot waterfall in the Grand Canyon of the Yellowstone",
+      "category": "geological",
+      "visitor_center": true,
+      "accessibility": "medium",
+      "tags": ["iconic", "waterfall", "canyon", "photography", "must-see"],
+      "height_feet": 308
+    },
+    {
+      "name": "Upper Falls (Grand Canyon of Yellowstone)",
+      "coordinates": {
+        "lat": 44.71278,
+        "lng": -110.49972
+      },
+      "tile_id": "YS-047-068",
+      "type": "waterfall",
+      "icon": "waterfall",
+      "prominence": "medium",
+      "zoom_levels": [10, 22],
+      "description": "109-foot waterfall upstream from Lower Falls",
+      "category": "geological",
+      "visitor_center": false,
+      "accessibility": "medium",
+      "tags": ["waterfall", "canyon", "photography"],
+      "height_feet": 109
+    },
+    {
+      "name": "Mammoth Hot Springs",
+      "coordinates": {
+        "lat": 44.9668798,
+        "lng": -110.712155
+      },
+      "tile_id": "YS-082-095",
+      "type": "hot_spring_terraces",
+      "icon": "hot-spring",
+      "prominence": "high",
+      "zoom_levels": [8, 22],
+      "description": "Stunning travertine terraces formed by mineral-rich hot springs",
+      "category": "geothermal",
+      "visitor_center": true,
+      "accessibility": "high",
+      "tags": ["iconic", "geothermal", "terraces", "unique", "must-see"]
+    },
+    {
+      "name": "Norris Geyser Basin",
+      "coordinates": {
+        "lat": 44.72861,
+        "lng": -110.70444
+      },
+      "tile_id": "YS-048-069",
+      "type": "geyser_basin",
+      "icon": "geyser",
+      "prominence": "high",
+      "zoom_levels": [9, 22],
+      "description": "Hottest and most dynamic geyser basin in Yellowstone",
+      "category": "geothermal",
+      "visitor_center": true,
+      "accessibility": "high",
+      "tags": ["geothermal", "geyser", "hot-springs", "hiking"]
+    },
+    {
+      "name": "Tower Fall",
+      "coordinates": {
+        "lat": 44.8936643,
+        "lng": -110.3872186
+      },
+      "tile_id": "YS-076-087",
+      "type": "waterfall",
+      "icon": "waterfall",
+      "prominence": "medium",
+      "zoom_levels": [10, 22],
+      "description": "132-foot waterfall framed by volcanic pinnacles",
+      "category": "geological",
+      "visitor_center": false,
+      "accessibility": "medium",
+      "tags": ["waterfall", "photography", "scenic"],
+      "height_feet": 132
+    },
+    {
+      "name": "Yellowstone Lake",
+      "coordinates": {
+        "lat": 44.4667,
+        "lng": -110.3667
+      },
+      "tile_id": "YS-058-040",
+      "type": "lake",
+      "icon": "lake",
+      "prominence": "high",
+      "zoom_levels": [7, 22],
+      "description": "Largest high-elevation lake in North America at 7,733 feet",
+      "category": "water",
+      "visitor_center": true,
+      "accessibility": "high",
+      "tags": ["lake", "fishing", "scenic", "wildlife"],
+      "area_sq_miles": 136,
+      "elevation_feet": 7733
+    },
+    {
+      "name": "Artist Point",
+      "coordinates": {
+        "lat": 44.7198,
+        "lng": -110.4785
+      },
+      "tile_id": "YS-047-068",
+      "type": "viewpoint",
+      "icon": "viewpoint",
+      "prominence": "high",
+      "zoom_levels": [10, 22],
+      "description": "Iconic viewpoint overlooking Lower Falls and the Grand Canyon",
+      "category": "viewpoint",
+      "visitor_center": false,
+      "accessibility": "high",
+      "tags": ["photography", "viewpoint", "iconic", "must-see", "canyon"]
+    },
+    {
+      "name": "Lamar Valley",
+      "coordinates": {
+        "lat": 44.9,
+        "lng": -110.2
+      },
+      "tile_id": "YS-082-088",
+      "type": "valley",
+      "icon": "wildlife",
+      "prominence": "high",
+      "zoom_levels": [9, 22],
+      "description": "America's Serengeti - premier wildlife viewing area with bison, wolves, and bears",
+      "category": "wildlife",
+      "visitor_center": false,
+      "accessibility": "high",
+      "tags": ["wildlife", "bison", "wolves", "bears", "photography", "scenic"]
+    },
+    {
+      "name": "Hayden Valley",
+      "coordinates": {
+        "lat": 44.65,
+        "lng": -110.48
+      },
+      "tile_id": "YS-042-060",
+      "type": "valley",
+      "icon": "wildlife",
+      "prominence": "high",
+      "zoom_levels": [9, 22],
+      "description": "Broad valley with abundant wildlife including bison herds and grizzly bears",
+      "category": "wildlife",
+      "visitor_center": false,
+      "accessibility": "high",
+      "tags": ["wildlife", "bison", "bears", "birds", "scenic"]
+    },
+    {
+      "name": "West Thumb Geyser Basin",
+      "coordinates": {
+        "lat": 44.416,
+        "lng": -110.575
+      },
+      "tile_id": "YS-023-037",
+      "type": "geyser_basin",
+      "icon": "hot-spring",
+      "prominence": "medium",
+      "zoom_levels": [10, 22],
+      "description": "Geothermal features on the shore of Yellowstone Lake",
+      "category": "geothermal",
+      "visitor_center": true,
+      "accessibility": "high",
+      "tags": ["geothermal", "lake", "hot-springs", "scenic"]
+    },
+    {
+      "name": "Mount Washburn",
+      "coordinates": {
+        "lat": 44.798,
+        "lng": -110.433
+      },
+      "tile_id": "YS-062-077",
+      "type": "mountain",
+      "icon": "mountain",
+      "prominence": "medium",
+      "zoom_levels": [9, 22],
+      "description": "10,243-foot peak offering panoramic views of the park",
+      "category": "geological",
+      "visitor_center": false,
+      "accessibility": "low",
+      "tags": ["hiking", "mountain", "panoramic", "wildlife", "wildflowers"],
+      "elevation_feet": 10243
+    },
+    {
+      "name": "Firehole River",
+      "coordinates": {
+        "lat": 44.52,
+        "lng": -110.82
+      },
+      "tile_id": "YS-020-047",
+      "type": "river",
+      "icon": "river",
+      "prominence": "low",
+      "zoom_levels": [11, 22],
+      "description": "Warm river flowing through geyser basins, popular for swimming",
+      "category": "water",
+      "visitor_center": false,
+      "accessibility": "medium",
+      "tags": ["river", "swimming", "geothermal", "fishing"]
+    },
+    {
+      "name": "Roaring Mountain",
+      "coordinates": {
+        "lat": 44.76,
+        "lng": -110.72
+      },
+      "tile_id": "YS-051-072",
+      "type": "geothermal_feature",
+      "icon": "steam",
+      "prominence": "low",
+      "zoom_levels": [11, 22],
+      "description": "Acidic hydrothermal area with numerous fumaroles creating a roaring sound",
+      "category": "geothermal",
+      "visitor_center": false,
+      "accessibility": "medium",
+      "tags": ["geothermal", "unique", "geology"]
+    }
+  ],
+  "icon_legend": {
+    "geyser": "🌋",
+    "hot-spring": "♨️",
+    "waterfall": "💧",
+    "lake": "🏞️",
+    "viewpoint": "📸",
+    "wildlife": "🦬",
+    "mountain": "⛰️",
+    "river": "〰️",
+    "steam": "💨"
+  },
+  "prominence_levels": {
+    "high": "Show at zoom 8+, larger icon, bold text",
+    "medium": "Show at zoom 10+, medium icon, normal text",
+    "low": "Show at zoom 11+, small icon, subtle text"
+  },
+  "implementation_guidelines": {
+    "rendering": {
+      "icons": "Use custom SVG icons or emojis for each landmark type",
+      "labels": "Show landmark names at appropriate zoom levels based on prominence",
+      "clustering": "Consider clustering low-prominence landmarks at lower zoom levels",
+      "interaction": "Add click handlers to show landmark details in side panel"
+    },
+    "data_integration": {
+      "tile_association": "Link landmarks to their corresponding tile IDs for cross-referencing",
+      "nearby_tiles": "Consider marking tiles near high-prominence landmarks as 'premium'",
+      "search": "Make landmarks searchable in the app"
+    },
+    "visual_hierarchy": {
+      "zoom_8_9": "Show only high-prominence landmarks (7 total)",
+      "zoom_10_11": "Add medium-prominence landmarks (4 total)",
+      "zoom_12_plus": "Show all landmarks including low-prominence (4 total)"
+    },
+    "enhancement_opportunities": {
+      "photos": "Add high-quality photos for each landmark",
+      "facts": "Include interesting facts, visitor stats, or historical info",
+      "weather": "Integrate real-time weather data for each landmark",
+      "webcams": "Link to live webcams where available (Old Faithful, etc.)"
+    }
+  },
+  "statistics": {
+    "total_landmarks": 15,
+    "by_prominence": {
+      "high": 9,
+      "medium": 4,
+      "low": 2
+    },
+    "by_category": {
+      "geothermal": 7,
+      "geological": 3,
+      "water": 3,
+      "wildlife": 2,
+      "viewpoint": 1
+    },
+    "by_type": {
+      "geyser": 1,
+      "hot_spring": 1,
+      "waterfall": 3,
+      "hot_spring_terraces": 1,
+      "geyser_basin": 3,
+      "lake": 1,
+      "viewpoint": 1,
+      "valley": 2,
+      "mountain": 1,
+      "river": 1,
+      "geothermal_feature": 1
+    },
+    "visitor_centers": 7,
+    "must_see_tags": 6
+  },
+  "notes": {
+    "data_sources": "Coordinates derived from NPS data, Google Maps, and geographic databases",
+    "accuracy": "Coordinates are approximate and should be verified for production use",
+    "future_additions": "Consider adding: Roosevelt Lodge, Canyon Village, Bridge Bay, Madison Junction, etc."
+  }
+}

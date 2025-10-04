@@ -29,24 +29,24 @@ export function MapControls({ map, className = '' }: MapControlsProps) {
   };
 
   return (
-    <div className={`absolute top-4 right-4 flex flex-col gap-2 ${className}`}>
+    <div className={`fixed bottom-6 right-6 z-40 flex flex-col gap-2 ${className}`}>
       <button
         onClick={handleZoomIn}
-        className="w-10 h-10 rounded-lg glass hover:bg-white transition-all shadow-lg flex items-center justify-center"
+        className="w-10 h-10 rounded-xl backdrop-blur-xl bg-white/90 shadow-lg border border-slate-200/50 hover:bg-white transition-all duration-200 flex items-center justify-center"
         aria-label="Zoom in"
       >
         <ZoomIn className="h-5 w-5 text-slate-700" />
       </button>
       <button
         onClick={handleZoomOut}
-        className="w-10 h-10 rounded-lg glass hover:bg-white transition-all shadow-lg flex items-center justify-center"
+        className="w-10 h-10 rounded-xl backdrop-blur-xl bg-white/90 shadow-lg border border-slate-200/50 hover:bg-white transition-all duration-200 flex items-center justify-center"
         aria-label="Zoom out"
       >
         <ZoomOut className="h-5 w-5 text-slate-700" />
       </button>
       <button
         onClick={handleReset}
-        className="w-10 h-10 rounded-lg glass hover:bg-white transition-all shadow-lg flex items-center justify-center"
+        className="w-10 h-10 rounded-xl backdrop-blur-xl bg-white/90 shadow-lg border border-slate-200/50 hover:bg-white transition-all duration-200 flex items-center justify-center"
         aria-label="Reset view"
       >
         <Maximize2 className="h-5 w-5 text-slate-700" />

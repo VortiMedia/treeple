@@ -1,25 +1,44 @@
 'use client';
 
+import { useState } from 'react';
+import { Menu } from 'lucide-react';
 import { Logo } from './Logo';
 import { Navigation } from './Navigation';
+import { MobileNav } from './MobileNav';
+import { Button } from '@/components/ui/button';
 
 interface HeaderProps {
   className?: string;
 }
 
 export function Header({ className = '' }: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <header className={`fixed top-0 left-0 right-0 h-16 glass-strong border-b border-slate-200/50 shadow-sm z-50 ${className}`}>
-      <div className="w-full mx-auto h-full px-4 flex items-center justify-between">
-        {/* Left: Logo */}
-        <Logo />
+    <>
+      <header className={`fixed top-4 left-4 right-4 z-50 ${className}`}>
+        <div className="max-w-7xl mx-auto backdrop-blur-xl bg-white/90 rounded-2xl shadow-lg border border-slate-200/50 px-6 py-3">
+          <div className="flex items-center justify-between">
+            {/* Left: Logo */}
+            <Logo />
 
-        {/* Center: Desktop Navigation */}
-        <Navigation className="hidden md:flex" />
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-11 w-11 md:hidden"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu className="h-6 w-6 text-slate-700" />
+            </Button>
 
-        {/* Right: Account placeholder (Phase 2) - responsive spacer */}
-        <div className="w-24 hidden md:block" />
-      </div>
-    </header>
+            {/* Center/Right: Navigation with Auth */}
+            <Navigation className="hidden md:flex" />
+          </div>
+        </div>
+      </header>
+
+      <MobileNav isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+    </>
   );
 }
