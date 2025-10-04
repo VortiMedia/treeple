@@ -105,13 +105,13 @@ export function TileDetails({ tile, onReserve, onLandmarkClick }: TileDetailsPro
             {tile.message && (
               <div>
                 <label className="text-xs font-medium text-slate-600 uppercase tracking-wide">Message</label>
-                <p className="text-sm text-slate-700 mt-1 italic">"{tile.message}"</p>
+                <p className="text-sm text-slate-700 mt-1 italic">&ldquo;{tile.message}&rdquo;</p>
               </div>
             )}
             {tile.pattern && (
               <div>
                 <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 border-emerald-300">
-                  Part of "{tile.pattern}" pattern
+                  Part of &ldquo;{tile.pattern}&rdquo; pattern
                 </Badge>
               </div>
             )}

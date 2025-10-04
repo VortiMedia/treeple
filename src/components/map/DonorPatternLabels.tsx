@@ -15,15 +15,8 @@ interface DonorPatternLabelsProps {
   map: MapLibreMap | null;
 }
 
-/**
- * Displays floating labels over major donor pattern clusters
- * to make them more recognizable and tell the conservation story
- */
-export function DonorPatternLabels({ map }: DonorPatternLabelsProps) {
-  const markersRef = useRef<Marker[]>([]);
-
-  // Major donor patterns with approximate center coordinates
-  const donorPatterns: DonorPattern[] = [
+// Major donor patterns with approximate center coordinates (defined outside component to avoid re-creation)
+const DONOR_PATTERNS: DonorPattern[] = [
     {
       donor: 'Elon Musk',
       pattern: 'Bear Territory',
@@ -56,6 +49,13 @@ export function DonorPatternLabels({ map }: DonorPatternLabelsProps) {
     }
   ];
 
+/**
+ * Displays floating labels over major donor pattern clusters
+ * to make them more recognizable and tell the conservation story
+ */
+export function DonorPatternLabels({ map }: DonorPatternLabelsProps) {
+  const markersRef = useRef<Marker[]>([]);
+
   useEffect(() => {
     if (!map) return;
 
@@ -64,7 +64,7 @@ export function DonorPatternLabels({ map }: DonorPatternLabelsProps) {
     markersRef.current = [];
 
     // Create a label marker for each donor pattern
-    donorPatterns.forEach(pattern => {
+    DONOR_PATTERNS.forEach(pattern => {
       const colorConfig = DONOR_COLORS[pattern.donor];
       if (!colorConfig) return;
 

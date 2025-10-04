@@ -168,7 +168,7 @@ export function GridOverlay({
         console.error('⚠️ GridOverlay: Error during cleanup:', error);
       }
     };
-  }, [map, gridData, handleTileClick, handleTileHover, handleTileLeave, handleMouseEnter, handleMouseLeave]);
+  }, [map, gridData, tileStates, handleTileClick, handleTileHover, handleTileLeave, handleMouseEnter, handleMouseLeave]);
 
   // Update tile statuses when they change
   useEffect(() => {
