@@ -88,7 +88,7 @@ treeple/
 │   ├── DATA_STRUCTURE.md   # Data models
 │   ├── SETUP.md            # Setup guide
 │   ├── FOLDER_STRUCTURE.md # File tree
-│   └── CLAUDE.md           # AI assistant instructions
+│   └── AGENTS.md           # AI assistant instructions
 │
 ├── public/
 │   └── data/               # Implementation-specific data
@@ -424,9 +424,9 @@ vercel --prod
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and contribution process.
 
-### For AI Code Agents (Claude Code, etc.)
+### For AI coding agents
 
-This project is **optimized for AI-assisted development**. See [docs/CLAUDE.md](docs/CLAUDE.md) for specific guidelines.
+This project is **optimized for AI-assisted development**. See [docs/AGENTS.md](docs/AGENTS.md) for specific guidelines.
 
 Quick tips:
 1. **Read documentation first:** Start with [docs/PRD.md](docs/PRD.md)
