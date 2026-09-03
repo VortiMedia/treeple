@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">Treeple</title>
+  <desc id="desc">Treeple wordmark with an ember-colored conservation grid symbol.</desc>
+  <rect width="1200" height="300" rx="24" fill="#F4F0E8"/>
+  <g transform="translate(72 66)">
+    <rect width="168" height="168" rx="12" fill="#242321"/>
+    <g fill="none" stroke="#F4F0E8" stroke-width="8">
+      <rect x="34" y="34" width="32" height="32"/>
+      <rect x="76" y="34" width="32" height="32"/>
+      <rect x="34" y="76" width="32" height="32"/>
+      <rect x="118" y="76" width="32" height="32"/>
+      <rect x="76" y="118" width="32" height="32"/>
+      <rect x="118" y="118" width="32" height="32"/>
+    </g>
+    <rect x="76" y="76" width="32" height="32" fill="#D85A2A"/>
+    <rect x="118" y="34" width="32" height="32" fill="#625E57"/>
+  </g>
+  <text x="286" y="138" fill="#242321" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="76" font-weight="700" letter-spacing="-3">TREEPLE</text>
+  <text x="290" y="195" fill="#625E57" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" letter-spacing="1">CONSERVATION GRID PLATFORM</text>
+  <path d="M290 220h730" stroke="#D85A2A" stroke-width="5"/>
+</svg>
